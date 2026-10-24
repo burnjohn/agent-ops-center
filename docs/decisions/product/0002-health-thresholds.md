@@ -1,10 +1,10 @@
 ---
-status: proposed
+status: superseded
 date: 2026-10-24
 decision-makers: []  # drafted by Claude 2026-10-24, awaiting review
 affects: ["docs/specs/abstract-project-spec.md"]
 supersedes: []
-superseded-by: []
+superseded-by: ["PDR-0011"]
 ---
 
 # PDR-0002: Agent is Stale after 30 s and Offline after 2 min of silence, except while a tool runs

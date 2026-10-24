@@ -19,6 +19,7 @@ AGENTS.md                    project-wide agent instructions (this file)
 .claude/skills/              on-demand skills (catalog: .claude/skills/README.md)
 docs/architecture/           how the system is built (overview, modules, diagrams)
 docs/specs/                  feature specs — WHAT and WHY, EARS acceptance criteria
+docs/design/                 tokens, component catalogue, mock data, clickable prototype source
 docs/decisions/architecture/ ADRs (MADR 4.0) — technical decisions that constrain the code
 docs/decisions/product/      PDRs — product decisions that constrain the specs
 docs/plans/                  implementation plans written by implementation-planner
@@ -100,7 +101,8 @@ The repository remembers what agents learn, so the next session does not repeat 
 ## Read when
 
 - **Starting any task** → `insights/gotchas.md`, then the relevant `docs/decisions/*/README.md`
-- **Writing a spec** → `docs/specs/README.md`, `docs/decisions/product/README.md`
+- **Writing a spec** → `docs/specs/README.md`, `docs/decisions/product/README.md`, `docs/design/README.md`
+- **Building UI** → `docs/design/tokens.css`, `docs/design/components.md`
 - **Planning or changing structure** → `docs/architecture/README.md`, `docs/decisions/architecture/README.md`
 - **Choosing a library, store, protocol or boundary** → `architecture-decisions` skill
 - **Hit unexpected behavior** → `insights/gotchas.md`, `<module>/insights/gotchas.md`

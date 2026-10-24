@@ -1,10 +1,10 @@
 ---
-status: proposed
+status: superseded
 date: 2026-10-24
 decision-makers: []  # drafted by Claude 2026-10-24, awaiting review
 affects: ["docs/specs/abstract-project-spec.md"]
 supersedes: []
-superseded-by: []
+superseded-by: ["PDR-0009"]
 ---
 
 # PDR-0003: Agents pull work themselves; Operator does not assign tickets in the MVP

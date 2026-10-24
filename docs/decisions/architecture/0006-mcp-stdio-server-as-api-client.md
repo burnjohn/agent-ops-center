@@ -1,13 +1,18 @@
 ---
 status: proposed
 date: 2026-10-24
-decision-makers: []  # drafted by Claude 2026-10-24, awaiting review
+decision-makers: []  # drafted by Claude 2026-10-24; deferred to next iteration by Ivan Lapa 2026-10-24
 scope: ["mcp/**"]
 supersedes: []
 superseded-by: []
 ---
 
 # ADR-0006: Ship the agent integration as a stdio MCP server that calls the HTTP API
+
+> **Deferred to the next iteration.** The owner decided on 2026-10-24 that the MVP runs on simulated
+> agents only (ADR-0008); the MCP server is out of MVP scope (PDR-0008, proposed, records the scope cut). This record
+> stays `proposed` and is reviewed again when the next iteration starts. Until then no `mcp/` package
+> is created (ADR-0002).
 
 ## Context and Problem Statement
 Agents (Claude Code and others) connect via MCP (INT-02). Identity must be set at launch, not invented by

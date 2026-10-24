@@ -10,4 +10,7 @@ Rules:
 
 | Spec | Status | Plan |
 |------|--------|------|
-| [Abstract Project Spec](abstract-project-spec.md) — Agent Board + Mission Control | approved | TBD — after UI design |
+| [Abstract Project Spec](abstract-project-spec.md) — Agent Board + Mission Control | draft (revised 2026-10-24 to match the prototype; awaiting re-approval) | TBD — after UI design |
+| [Server API](server-api.md) — domain commands, REST endpoints, SSE stream, simulation engine, health & cost (SPEC-server-api) | draft (2026-10-24) | TBD — `docs/plans/server-api.md` |
+| [Database](database.md) — schema, `events` journal, seed fixture, reset (SPEC-database) | draft (2026-10-24) | TBD — `docs/plans/database.md` |
+| [Web UI](web-ui.md) — routes, screens, components, moves, live updates, a11y (SPEC-web-ui) | draft (2026-10-24) | TBD — `docs/plans/web-ui.md` |
