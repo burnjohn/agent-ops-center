@@ -1,5 +1,5 @@
 ---
-status: proposed
+status: accepted
 date: 2026-10-24
 decision-makers: []  # drafted by Claude 2026-10-24, awaiting review
 affects: ["docs/specs/abstract-project-spec.md"]

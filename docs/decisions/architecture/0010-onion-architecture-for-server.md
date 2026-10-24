@@ -1,5 +1,5 @@
 ---
-status: proposed
+status: accepted
 date: 2026-10-24
 decision-makers: [Ivan Lapa]  # chosen by owner 2026-10-24, drafted by Claude
 scope: ["server/src/**", "shared/src/**"]

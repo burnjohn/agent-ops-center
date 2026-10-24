@@ -1,5 +1,5 @@
 ---
-status: proposed
+status: accepted
 date: 2026-10-24
 decision-makers: [Ivan Lapa]  # chosen by owner 2026-10-24, drafted by Claude
 scope: ["server/src/infrastructure/db/**", "server/src/infrastructure/repositories/**", "server/drizzle/**", "server/drizzle.config.ts", "compose.yaml"]
@@ -63,7 +63,7 @@ Details:
 - RULE: No code issues UPDATE or DELETE on `events`.
   CHECK: `grep -rnE "update\(events\)|delete\(events\)|UPDATE events|DELETE FROM events" server/src`
 - RULE: Every application command that changes a state table inserts at least one `events` row in the same transaction (through the unit-of-work port), after taking the events advisory lock.
-  CHECK: reviewer + `server/src/infrastructure/db/unit-of-work.test.ts` (rollback leaves no event; concurrent commands produce strictly increasing, commit-ordered `seq`; gaps from rolled-back transactions are allowed)
+  CHECK: reviewer + `server/src/infrastructure/db/unit-of-work.int.test.ts` (rollback leaves no event; concurrent commands produce strictly increasing, commit-ordered `seq`; gaps from rolled-back transactions are allowed)
 - RULE: Schema changes ship as a generated migration in `server/drizzle/` committed together with the `schema.ts` change.
   CHECK: `pnpm --filter @agent-ops/server exec drizzle-kit check` and reviewer
 - RULE: `DATABASE_URL` is read only from the environment (config module); no connection string is committed.

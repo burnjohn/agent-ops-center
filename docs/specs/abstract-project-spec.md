@@ -1,5 +1,5 @@
 ---
-status: draft
+status: approved
 date: 2026-10-24
 owner: Ivan Lapa
 plan: TBD — after UI design

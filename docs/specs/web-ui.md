@@ -1,8 +1,8 @@
 ---
-status: draft               # draft | approved | implemented | superseded
+status: approved               # draft | approved | implemented | superseded
 date: 2026-10-24
 owner: Ivan Lapa
-plan: docs/plans/web-ui.md
+plan: docs/plans/mvp.md
 ---
 
 # Spec: Web UI — Agent Board, Mission Control, Usage & Cost, detail pages
@@ -49,30 +49,29 @@ against `SPEC-server-api` without re-reading the prototype.
 
 ## Constraints
 
-All records except PDR-0001 and ADR-0001 are **proposed**; this spec follows them as written and must be
-revisited if any is changed on acceptance.
+All records below were accepted by the owner on 2026-10-24 (ADR-0006/0007 stay proposed and are out of scope).
 
 - PDR-0001 Record product decisions as PDRs (accepted) — the UI spec does not contradict any PDR.
-- PDR-0004 No WIP limit on In Progress (proposed) — the UI never refuses a move for column capacity.
-- PDR-0006 Operator can release an In Progress ticket back to Ready (proposed) — release only to Ready,
+- PDR-0004 No WIP limit on In Progress (accepted 2026-10-24) — the UI never refuses a move for column capacity.
+- PDR-0006 Operator can release an In Progress ticket back to Ready (accepted 2026-10-24) — release only to Ready,
   always via the confirm modal.
-- PDR-0007 Usage & Cost and Session Log ship on mock data only (proposed) — every mock view carries a
+- PDR-0007 Usage & Cost and Session Log ship on mock data only (accepted 2026-10-24) — every mock view carries a
   `MOCK` label (MOCK-01).
-- PDR-0008 MVP runs on simulated agents only (proposed) — no UI for connecting real agents.
-- PDR-0009 Operator assigns tickets and moves them within lifecycle guards (proposed) — transition table
+- PDR-0008 MVP runs on simulated agents only (accepted 2026-10-24) — no UI for connecting real agents.
+- PDR-0009 Operator assigns tickets and moves them within lifecycle guards (accepted 2026-10-24) — transition table
   below; refused moves are refused the same way for drag and buttons, with the reason shown; assignment
   is shown as an Operator event.
-- PDR-0010 Offline agents stay in the Mission Control grid, dimmed and sorted last (proposed).
+- PDR-0010 Offline agents stay in the Mission Control grid, dimmed and sorted last (accepted 2026-10-24).
 - PDR-0011 Health thresholds 30 s / 120 s, tool grace capped at 10 min, heartbeat for waiting agents
-  (proposed) — thresholds are shown to the Operator (health legend).
-- ADR-0002 TypeScript pnpm monorepo with `web/`, `server/`, `shared/` (proposed) — the UI consumes
+  (accepted 2026-10-24) — thresholds are shown to the Operator (health legend).
+- ADR-0002 TypeScript pnpm monorepo with `web/`, `server/`, `shared/` (accepted 2026-10-24) — the UI consumes
   contract types from `shared/` only, never from `server/`.
-- ADR-0004 Fastify REST commands + one SSE stream with `Last-Event-ID` resume (proposed) — the UI reads
+- ADR-0004 Fastify REST commands + one SSE stream with `Last-Event-ID` resume (accepted 2026-10-24) — the UI reads
   resources, sends commands, and follows exactly one event stream; reconnect resumes from the last seen
   `seq`.
 - ADR-0008 Simulation inside the server through the command layer, advancing on demand, auto-play off by
-  default (proposed) — the UI only *requests* steps/play; it never simulates.
-- ADR-0009 PostgreSQL + transactional event log, `events.seq` drives feeds and resume (proposed) — the
+  default (accepted 2026-10-24) — the UI only *requests* steps/play; it never simulates.
+- ADR-0009 PostgreSQL + transactional event log, `events.seq` drives feeds and resume (accepted 2026-10-24) — the
   UI orders feeds by `seq`.
 - ADR-0011 Web stack: React 19 + Vite SPA, client-side routing, CSS Modules over
   `docs/design/tokens.css`, server-state cache updated/invalidated by stream events (being drafted,
@@ -235,7 +234,7 @@ Each AC lists the abstract-spec IDs it traces to and how it is observed. "The UI
   numbers. _(traces: —; observable: component test with a pending request)_
 - **AC-28** IF a screen's initial data cannot be loaded, THEN the UI shall show "Couldn’t load <screen> —
   the server is not responding." with a `Retry` button that reloads that data. _(traces: BRD-10; observable: e2e with server stopped before load)_
-- **AC-29** WHEN the event stream reports an error, or no message or keepalive comment has arrived for
+- **AC-29** WHEN the event stream reports an error, or no message (including `keepalive`) has arrived for
   30 s (twice the server's 15 s keepalive, server-api AC-62), the UI shall treat the stream as lost and
   show within 2 s a full-width top banner below the header, `role="status"`, ink fill, mono text
   «Connection lost — reconnecting…». _(traces: BRD-10, NFR-04; observable: e2e — kill the server; banner appears; a stalled proxy test shows it after 30 s)_
@@ -517,7 +516,7 @@ Common to every modal: 50 % black scrim, square panel with title row, body and a
   (segmented, `aria-pressed`) and the `Category` select `All`, `Agents`, `Tickets`, `Tools` (Event
   `category` `agent`, `ticket`, `tool`). _(traces: MC-06; observable: component test)_
 - **AC-101** WHEN more Events match than are shown, the Event Log shall show `Show 40 more`, which adds the
-  next 40 older matching Events. _(traces: MC-06; observable: seed has 44 events → button visible, 4 more after click)_
+  next 40 older matching Events. _(traces: MC-06; observable: seed has 44 events, 43 of them in the feed (`agent.heartbeat` is hidden) → button visible, 3 more after click)_
 - **AC-102** WHEN the Operator activates `Ⅱ PAUSE`, the Event Log shall stop inserting new rows, switch
   the button to `▶ RESUME` (`aria-pressed="true"`) and, as soon as new Events arrive, show the banner
   button «PAUSED · N NEW EVENTS — RESUME ↑»; activating either shall insert every held Event and resume.
@@ -799,7 +798,7 @@ Dependencies on SPEC-server-api — all resolved by [`server-api.md`](server-api
 | 6 | Mismatch spans (AC-107) | agent page `saidVsDid`, AC-29 |
 | 7 | Event types and display text (AC-103…AC-105) | §C5 catalogue with `feed` flag and `payload.summary` |
 | 8 | Hold auto-play during a modal / drag (AC-9) | `POST /simulation/hold`, 15 s expiry, AC-56 |
-| 9 | Stream start, resume, resync, liveness (AC-29…AC-32) | §C8 `hello`, `resync`, `: keepalive` ≤ 15 s; AC-58…AC-62; `X-As-Of-Seq` on reads, AC-71 |
+| 9 | Stream start, resume, resync, liveness (AC-29…AC-32) | §C8 `hello`, `resync`, `event: keepalive` ≤ 15 s; AC-58…AC-62; `X-As-Of-Seq` on reads, AC-71 |
 | 10 | Stale-state protection for commands (AC-45) | `expectedStatus` + `409 stale_state`, AC-6 |
 | 11 | Simulation Clock after each step | `simulation.stepped` payload `clock`, `hello.clock` |
 
@@ -818,7 +817,7 @@ Shapes the UI relies on, by name only; fields are defined in `SPEC-server-api` �
   filters by `source` and `category`.
 - **Stream messages** (server-api §C8): `hello` (`lastSeq`, `journalFloorSeq`, `clock`, `playing`),
   events (`id: <seq>`, `event: <type>`, `data: <Event>`), `resync` (`reason`: `ahead` | `below_floor` |
-  `too_far_behind`), `: keepalive`; reads carry `X-As-Of-Seq`; reconnect sends the last
+  `too_far_behind`), `keepalive` (id-less event); reads carry `X-As-Of-Seq`; reconnect sends the last
   applied `seq` as `Last-Event-ID`.
 - **Ticket, Agent, Session, LogEntry, ModelPrice, Simulation state:** as in the abstract spec's domain
   model, with shapes from server-api §C2 (enums §C1 are lower snake case; the UI maps them to display

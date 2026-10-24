@@ -1,8 +1,8 @@
 ---
-status: draft               # draft | approved | implemented | superseded
+status: approved               # draft | approved | implemented | superseded
 date: 2026-10-24
 owner: Ivan Lapa
-plan: docs/plans/database.md
+plan: docs/plans/mvp.md
 ---
 
 # Spec: Database — schema, event journal, fixture and reset
@@ -16,7 +16,7 @@ The MVP (simulation only, PDR-0008) needs one durable store that the server, the
 screen agree on. The Board and Mission Control must never disagree (NFR-02), everything must survive a
 restart (NFR-03), a reconnecting browser must receive exactly the events it missed (NFR-04), and Usage &
 Cost / Session Log must show a fixed, reproducible mock dataset (MOCK-02…MOCK-04) that the prototype
-already defines down to the token. ADR-0009 (proposed) chose PostgreSQL + Drizzle with state tables
+already defines down to the token. ADR-0009 (accepted) chose PostgreSQL + Drizzle with state tables
 plus an append-only `events` journal written in the same transaction. This spec pins down **what** that
 store holds, which invariants it enforces, how the fixture maps into it, and how it is reset — so the
 server and UI specs can rely on it without re-deciding the data layer.
@@ -49,17 +49,17 @@ server and UI specs can rely on it without re-deciding the data layer.
 ## Constraints
 
 - **PDR-0001** Record product decisions as PDRs (accepted) — specs follow PDRs; this spec does not contradict any.
-- **PDR-0004** No WIP limit (proposed) — the schema has no limit on `in_progress` tickets; only "one active ticket per agent".
-- **PDR-0006** Operator can release an In Progress ticket (proposed) — a released ticket has no assignee; the agent keeps a pending-refusal marker (simulation state) until its next step (SIM-11).
-- **PDR-0007** Usage & Cost and Session Log on mock data (proposed) — sessions, log entries and model prices come from the fixture plus the simulator; no live capture tables.
-- **PDR-0008** MVP runs on simulated agents only (proposed) — `agents.kind` is stored for display only; no MCP/telemetry ingest tables.
-- **PDR-0009** Operator assigns and moves tickets within guards (proposed) — assignment is an Operator event, an agent self-claim is an `agent_report` event; one ticket per agent.
-- **PDR-0010** Offline agents stay in the grid (proposed) — no "archived/collapsed" agent state is stored.
-- **PDR-0011** Health thresholds with capped tool grace and heartbeat (proposed) — health is **derived**, never stored; the store keeps `last_seen_at`, current tool and its start time, all in simulation time.
-- **ADR-0009** PostgreSQL + Drizzle with a transactional, append-only `events` table (proposed, supersedes ADR-0003) — state tables + `events` in the same transaction, commit-ordered `seq` (advisory lock), drizzle-kit generated migrations applied on start and in tests, Postgres via `compose.yaml` pinned to a major version, `DATABASE_URL` from env only.
-- **ADR-0008** Simulation through the command layer (proposed) — the simulator writes only through application commands, so every simulated change also goes through the same-transaction rule; auto-play is off after every boot.
-- **ADR-0010** Onion architecture (proposed) — only the infrastructure layer touches the database; this spec's column names (snake_case) map to contract fields (camelCase) in `shared/`.
-- **ADR-0002** TypeScript pnpm monorepo (proposed) — the database belongs to the `server/` module.
+- **PDR-0004** No WIP limit (accepted 2026-10-24) — the schema has no limit on `in_progress` tickets; only "one active ticket per agent".
+- **PDR-0006** Operator can release an In Progress ticket (accepted 2026-10-24) — a released ticket has no assignee; the agent keeps a pending-refusal marker (simulation state) until its next step (SIM-11).
+- **PDR-0007** Usage & Cost and Session Log on mock data (accepted 2026-10-24) — sessions, log entries and model prices come from the fixture plus the simulator; no live capture tables.
+- **PDR-0008** MVP runs on simulated agents only (accepted 2026-10-24) — `agents.kind` is stored for display only; no MCP/telemetry ingest tables.
+- **PDR-0009** Operator assigns and moves tickets within guards (accepted 2026-10-24) — assignment is an Operator event, an agent self-claim is an `agent_report` event; one ticket per agent.
+- **PDR-0010** Offline agents stay in the grid (accepted 2026-10-24) — no "archived/collapsed" agent state is stored.
+- **PDR-0011** Health thresholds with capped tool grace and heartbeat (accepted 2026-10-24) — health is **derived**, never stored; the store keeps `last_seen_at`, current tool and its start time, all in simulation time.
+- **ADR-0009** PostgreSQL + Drizzle with a transactional, append-only `events` table (accepted 2026-10-24, supersedes ADR-0003) — state tables + `events` in the same transaction, commit-ordered `seq` (advisory lock), drizzle-kit generated migrations applied on start and in tests, Postgres via `compose.yaml` pinned to a major version, `DATABASE_URL` from env only.
+- **ADR-0008** Simulation through the command layer (accepted 2026-10-24) — the simulator writes only through application commands, so every simulated change also goes through the same-transaction rule; auto-play is off after every boot.
+- **ADR-0010** Onion architecture (accepted 2026-10-24) — only the infrastructure layer touches the database; this spec's column names (snake_case) map to contract fields (camelCase) in `shared/`.
+- **ADR-0002** TypeScript pnpm monorepo (accepted 2026-10-24) — the database belongs to the `server/` module.
 - **ADR-0012** Testing strategy (being drafted in parallel; cited by number) — integration tests run against a real PostgreSQL, never a mock or another engine; every AC below marked _(integration)_ is verified that way.
 
 ## User stories

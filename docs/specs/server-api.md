@@ -1,8 +1,8 @@
 ---
-status: draft               # draft | approved | implemented | superseded
+status: approved               # draft | approved | implemented | superseded
 date: 2026-10-24
 owner: Ivan Lapa
-plan: docs/plans/server-api.md
+plan: docs/plans/mvp.md
 ---
 
 # Spec: Server API — domain commands, read API, live stream and simulation engine
@@ -54,21 +54,21 @@ Accepted decisions:
 - PDR-0001 Record product decisions as PDRs (accepted) — this spec must not contradict any PDR.
 - ADR-0001 Record architecture decisions as MADR 4.0 (accepted) — format only.
 
-Proposed decisions this spec is written against (owner-chosen 2026-10-24, awaiting formal acceptance):
-- PDR-0004 No WIP limit (proposed) — the only capacity rule is one ticket per agent.
-- PDR-0006 Operator can release an In Progress ticket back to Ready (proposed) — release needs confirmation; the agent gets a refusal on its next step.
-- PDR-0007 Usage & Cost and Session Log ship on mock data only (proposed) — every cost and log response is marked as mock.
-- PDR-0008 MVP runs on simulated agents only (proposed) — no endpoint is used by a real agent in the MVP.
-- PDR-0009 Operator assigns and moves tickets within lifecycle guards (proposed, supersedes PDR-0003) — the transition table and the assign rules below.
-- PDR-0010 Offline agents stay in the grid (proposed) — no agent or history is hidden or deleted because it is Offline.
-- PDR-0011 Health thresholds with capped tool grace and heartbeat (proposed, supersedes PDR-0002) — 30 s / 120 s / 10 min; waiting agents heartbeat more often than every 30 s.
-- ADR-0002 TypeScript pnpm monorepo with `web/`, `server/`, `shared/` (proposed) — contracts live in `shared/`.
-- ADR-0004 Fastify HTTP API with one SSE stream (proposed) — REST commands, `GET` reads, one stream with `Last-Event-ID` resume mapped to `events.seq`.
-- ADR-0008 Simulation through the command layer, on demand (proposed) — the simulator uses the same commands, a seeded PRNG and the Simulation Clock; auto-play off by default.
-- ADR-0009 PostgreSQL + Drizzle with a transactional events table (proposed, supersedes ADR-0003) — every state change commits together with its event rows; `seq` follows commit order.
-- ADR-0010 Onion architecture with Zod contracts in `shared/` (proposed) — every shape in *Contracts* exists once, in `shared/`.
-- ADR-0011 Web stack (proposed) — the client consumes this API with TanStack Query and updates its cache from SSE events.
-- ADR-0012 Testing strategy (proposed) — the ACs below are verified with Vitest unit tests and Postgres integration tests against a real Postgres.
+Decisions this spec is written against (owner-chosen and accepted 2026-10-24):
+- PDR-0004 No WIP limit (accepted 2026-10-24) — the only capacity rule is one ticket per agent.
+- PDR-0006 Operator can release an In Progress ticket back to Ready (accepted 2026-10-24) — release needs confirmation; the agent gets a refusal on its next step.
+- PDR-0007 Usage & Cost and Session Log ship on mock data only (accepted 2026-10-24) — every cost and log response is marked as mock.
+- PDR-0008 MVP runs on simulated agents only (accepted 2026-10-24) — no endpoint is used by a real agent in the MVP.
+- PDR-0009 Operator assigns and moves tickets within lifecycle guards (accepted 2026-10-24, supersedes PDR-0003) — the transition table and the assign rules below.
+- PDR-0010 Offline agents stay in the grid (accepted 2026-10-24) — no agent or history is hidden or deleted because it is Offline.
+- PDR-0011 Health thresholds with capped tool grace and heartbeat (accepted 2026-10-24, supersedes PDR-0002) — 30 s / 120 s / 10 min; waiting agents heartbeat more often than every 30 s.
+- ADR-0002 TypeScript pnpm monorepo with `web/`, `server/`, `shared/` (accepted 2026-10-24) — contracts live in `shared/`.
+- ADR-0004 Fastify HTTP API with one SSE stream (accepted 2026-10-24) — REST commands, `GET` reads, one stream with `Last-Event-ID` resume mapped to `events.seq`.
+- ADR-0008 Simulation through the command layer, on demand (accepted 2026-10-24) — the simulator uses the same commands, a seeded PRNG and the Simulation Clock; auto-play off by default.
+- ADR-0009 PostgreSQL + Drizzle with a transactional events table (accepted 2026-10-24, supersedes ADR-0003) — every state change commits together with its event rows; `seq` follows commit order.
+- ADR-0010 Onion architecture with Zod contracts in `shared/` (accepted 2026-10-24) — every shape in *Contracts* exists once, in `shared/`.
+- ADR-0011 Web stack (accepted 2026-10-24) — the client consumes this API with TanStack Query and updates its cache from SSE events.
+- ADR-0012 Testing strategy (accepted 2026-10-24) — the ACs below are verified with Vitest unit tests and Postgres integration tests against a real Postgres.
 
 ## User stories
 
@@ -239,8 +239,8 @@ requirements it traces to.
   _(traces: NFR-04, ADR-0004, ADR-0009 · observable: disconnect, commit 5 events, reconnect with the last id → exactly those 5)_
 - **AC-61** IF a client resumes from an `N` greater than the last committed `seq`, lower than `simulation_state.journal_floor_seq` (returned as `journalFloorSeq`; its history was wiped by a reset — no separate epoch exists), or more than 5 000 events behind, THEN the server SHALL send one `resync` message instead of replaying, and continue live.
   _(traces: NFR-04, MOCK-04 · observable: resume with `N = 999999` → `resync` reason `ahead`; resume with a pre-reset id → `resync` reason `below_floor`)_
-- **AC-62** WHILE a stream is open, the server SHALL send an SSE comment at least every 15 s so that the client can detect a dead connection.
-  _(traces: BRD-10, NFR-04 · observable: idle stream receives `:keepalive` within 15 s)_
+- **AC-62** WHILE a stream is open, the server SHALL send an id-less `event: keepalive` message at least every 15 s so that the client can detect a dead connection (a browser `EventSource` never exposes SSE comments to code, so a comment alone is not enough).
+  _(traces: BRD-10, NFR-04 · observable: idle stream receives `event: keepalive` within 15 s)_
 
 ### H. Fixture, persistence and reset
 
@@ -334,7 +334,7 @@ Modules (ADR-0002): `web/` (SPA), `server/` (this spec), `shared/` (contracts), 
 | From → To | What crosses | Failure contract |
 |---|---|---|
 | web → server | REST commands (`POST`) and reads (`GET`) with bodies/queries typed by `shared/` schemas | 400/404/409/503 with the error envelope; the UI shows the `message`/`reason` |
-| server → web | One SSE stream: `hello`, journal events, `resync`, keepalive comments | stream drops → browser reconnects with `Last-Event-ID`; `resync` → client refetches all reads |
+| server → web | One SSE stream: `hello`, journal events, `resync`, `keepalive` messages | stream drops → browser reconnects with `Last-Event-ID`; `resync` → client refetches all reads |
 | server → Postgres | One transaction per command / step: state rows + event rows; reads | DB down → 503, nothing committed |
 | shared → web, server | Zod schemas, enums, the transition table, the health rule, event catalogue | a contract change breaks both typechecks |
 | terminal → server data | reset command | refuses while the server is up |
@@ -669,7 +669,8 @@ data: <Event JSON>
 event: resync                         (no id)
 data: { reason: "ahead" | "below_floor" | "too_far_behind", lastSeq, journalFloorSeq }
 
-: keepalive                            (comment, ≤ every 15 s)
+event: keepalive                      (no id, ≤ every 15 s)
+data: {}
 ```
 
 ## Untrusted inputs
