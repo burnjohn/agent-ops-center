@@ -10,4 +10,4 @@ Rules:
 
 | Spec | Status | Plan |
 |------|--------|------|
-| — | — | — |
+| [Abstract Project Spec](abstract-project-spec.md) — Agent Board + Mission Control | approved | TBD — after UI design |
