@@ -1,7 +1,8 @@
 # AGENTS.md
 
 Instructions for AI coding agents (Claude Code, Cursor, Codex, …) working in this repository.
-`CLAUDE.md` imports this file, so this is the single source of truth.
+This is the single source of truth. Claude Code (v2.1.277+) reads it natively — do not add a `CLAUDE.md`:
+while any `CLAUDE.md`, `.claude/CLAUDE.md` or `CLAUDE.local.md` exists, Claude Code ignores this file.
 
 ## Project
 
@@ -12,7 +13,7 @@ add dependencies or create packages on your own. Propose an ADR first (see below
 ## Repository layout
 
 ```
-AGENTS.md / CLAUDE.md        project-wide agent instructions (this file)
+AGENTS.md                    project-wide agent instructions (this file)
 .claude/agents/              subagents: researcher, spec-creator, implementation-planner,
                              implementer, test-writer, architecture-reviewer, plan-verifier, doc-writer
 .claude/skills/              on-demand skills (catalog: .claude/skills/README.md)
@@ -29,7 +30,7 @@ insights/                    project-wide self-learning notes (INSIGHTS.md, gotc
 ## Modules
 
 No modules yet. When a module (package/app) is created, add a row here and give it:
-`<module>/AGENTS.md` (+ a `CLAUDE.md` containing `@AGENTS.md`), `<module>/insights/INSIGHTS.md`
+`<module>/AGENTS.md`, `<module>/insights/INSIGHTS.md`
 and `<module>/insights/gotchas.md`. Agents read this table to know which modules exist.
 
 | Module | Path | Purpose | Test command | Typecheck command |
@@ -87,6 +88,14 @@ The repository remembers what agents learn, so the next session does not repeat 
 - Never commit secrets. Secrets come from env/secret files listed in `.gitignore`.
 - Conventional commits (`git-workflow` skill). Branch from `main`; never push to `main` directly.
 - Reply to the user in the language they wrote in; code, identifiers and docs stay in English.
+
+## Claude Code specifics
+
+- Subagents live in `.claude/agents/` (overview: `.claude/agents/README.md`). Route work to them by
+  their `description`; the main session orchestrates and keeps the human in the loop.
+- Skills live in `.claude/skills/`; agents preload theirs through the `skills:` frontmatter.
+- Hooks and env are in `.claude/settings.json`. Personal overrides go to `.claude/settings.local.json`
+  (git-ignored). For personal instructions use `~/.claude/CLAUDE.md`, not a `CLAUDE.local.md` here.
 
 ## Read when
 

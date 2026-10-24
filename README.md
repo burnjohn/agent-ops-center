@@ -2,7 +2,7 @@
 
 Built with AI agents through Spec-Driven Development.
 
-- Agent instructions: [`AGENTS.md`](AGENTS.md) (Claude Code reads it via [`CLAUDE.md`](CLAUDE.md))
+- Agent instructions: [`AGENTS.md`](AGENTS.md) — read natively by Claude Code, Cursor, Codex
 - Docs, specs and decisions: [`docs/`](docs/README.md)
 - Subagents: [`.claude/agents/`](.claude/agents/README.md) · Skills: [`.claude/skills/`](.claude/skills/README.md)
 - What agents learned: [`insights/`](insights/INSIGHTS.md)

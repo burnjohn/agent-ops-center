@@ -71,11 +71,11 @@ writing the ADR, not rules for the code.
 | [mermaid-diagram](mermaid-diagram/SKILL.md) | Docs | Mermaid diagrams in Markdown: flowcharts, sequence, class, ER, state |
 | [excalidraw-diagram](excalidraw-diagram/SKILL.md) | Docs | Excalidraw diagram JSON for workflows, architectures and concepts |
 
-## Skills vs agents vs CLAUDE.md
+## Skills vs agents vs AGENTS.md
 
 | Type | Where | Loaded | Purpose |
 |------|-------|--------|---------|
-| **Project instructions** | `AGENTS.md` (imported by `CLAUDE.md`) | Always | Conventions, layout, Modules table, workflow |
+| **Project instructions** | `AGENTS.md` (read natively by Claude Code) | Always | Conventions, layout, Modules table, workflow |
 | **Skills** | `.claude/skills/<name>/SKILL.md` | On demand, by name or relevance | Specialized knowledge and workflows |
 | **Agents** | `.claude/agents/<name>.md` | Via the Agent tool | Subagents with their own context, tools and preloaded skills |
 | **Hooks** | `.claude/settings.json` | On harness events | Automation, e.g. `pr-self-review` before `git push` |

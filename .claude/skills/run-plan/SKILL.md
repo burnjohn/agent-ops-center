@@ -46,7 +46,7 @@ interpretation of the args in one line before starting.
   implementer decide it silently.
 - **Module commands come from `AGENTS.md`.** Test and typecheck commands are read from the Modules
   table; never hardcode them. A task whose module is not in the table yet must create that row as
-  part of the task (and the module's `AGENTS.md`, `CLAUDE.md`, `insights/`), or be blocked.
+  part of the task (and the module's `AGENTS.md`, `insights/`), or be blocked.
 - **Never `git push`, merge, or open a PR.** The run ends at a review-clean working tree plus a
   recommendation to run `pr-self-review`.
 - **Bound the fix loop** to `max-fix` iterations. Never loop forever; if findings remain, stop and

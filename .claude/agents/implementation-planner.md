@@ -115,7 +115,7 @@ those commands in tasks' `Acceptance` and in *Testing strategy*. For each module
 - **Modules table empty** (no stack chosen yet) → the plan cannot assume any framework, package
   manager, or directory layout. Plan the stack decision first (a `proposed` ADR), and plan
   module creation only after it is accepted. A new module task must also create
-  `<module>/AGENTS.md` (+ `CLAUDE.md` containing `@AGENTS.md`), `<module>/insights/INSIGHTS.md`,
+  `<module>/AGENTS.md`, `<module>/insights/INSIGHTS.md`,
   `<module>/insights/gotchas.md`, and add its row to the Modules table.
 - **Shared contracts** — if a module holds cross-module contracts (types/schemas consumed by other
   modules), new contract files may be **added**; editing existing ones is a breaking change that

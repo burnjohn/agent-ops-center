@@ -129,7 +129,7 @@ Chosen option: "<Option A>", because <reason tied to the forces in Context>.
 - Good: "Every LLM call goes through `llmClient` with a Zod output schema." CHECK: reviewer
 - Bad: "Code should respect the layered architecture." Nothing to check.
 
-Prefer CHECK types in this order: existing test or lint → new lint or architecture test → grep → reviewer. If no rule can be written, the record is probably a convention for CLAUDE.md.
+Prefer CHECK types in this order: existing test or lint → new lint or architecture test → grep → reviewer. If no rule can be written, the record is probably a convention for AGENTS.md.
 
 **Scope.** As narrow as the decision really is. A global policy (error handling, logging) gets `["**"]`; a storage decision gets the storage directories. Too broad and every check loads it; too narrow and violations slip through.
 
