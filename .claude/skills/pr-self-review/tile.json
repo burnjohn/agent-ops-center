@@ -1,0 +1,11 @@
+{
+  "name": "local/pr-self-review",
+  "version": "0.1.0",
+  "private": true,
+  "summary": "PR self-review orchestrator — runs before git push or on demand. Routes changed files to buckets derived from the AGENTS.md Modules table, spawns sub-agents per bucket, checks the diff against accepted ADRs, and blocks push if any CRITICAL issues found.",
+  "skills": {
+    "pr-self-review": {
+      "path": "SKILL.md"
+    }
+  }
+}

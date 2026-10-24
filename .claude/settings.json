@@ -1,0 +1,18 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash(git push*)",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Before executing this git push command, invoke the pr-self-review skill and follow its execution algorithm. Run: git diff $(git merge-base origin/main HEAD)...HEAD --name-only --diff-filter=AM to get changed files, and filter noise as the skill defines (dependency/build output, lockfiles, generated files, logs, *.md, *.json except dependency manifests). Read the Modules table in AGENTS.md (never hardcode module paths) and route the remaining files into buckets by module Path and file extension per the skill's rules/file-routing.md: Tests, Data, UI Frontend, Backend/Domain, Root/Tooling. Spawn one sub-agent per non-empty bucket, applying the skills the pr-self-review skill assigns to that bucket (stack skills only if an accepted ADR picks that tech). Also check the diff against accepted ADRs in docs/decisions/architecture/ using the architecture-decisions skill, section 'Checking a diff': every violated Confirmation rule is a CRITICAL finding; an unrecorded decision (new dependency, new top-level directory, new external service) is a HIGH finding. Collect all findings, deduplicate by file:line, sort by severity, and output the PR Self-Review Report in the format defined in the skill. If any CRITICAL findings exist: print BLOCKER and DO NOT execute the git push — tell the user to fix the CRITICAL issues first. If no CRITICAL findings: print PASS and proceed with the git push."
+          }
+        ]
+      }
+    ]
+  },
+  "env": {
+    "ENABLE_TOOL_SEARCH": "true"
+  }
+}
