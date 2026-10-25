@@ -20,3 +20,7 @@ See also: `insights/gotchas.md` for known traps.
 ## Session Notes
 
 ## Open Questions
+
+## Tool & Library Notes
+
+2026-10-24 — typescript-eslint 8.72 peers `typescript <6.1`, so the repo pins typescript 6.0.3 even though 7.0.2 is "latest"; react-router is pinned to 7.18.4 because 8.5 needs Node >=22.22 (local is 22.17). Postgres 18 images mount the volume at `/var/lib/postgresql` (not `/data`). ref: package.json:1, web/package.json, compose.yaml

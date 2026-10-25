@@ -1,0 +1,35 @@
+{
+  "name": "@agent-ops/server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/main.ts",
+    "start": "tsx src/main.ts",
+    "test": "vitest run",
+    "test:unit": "vitest run --project unit",
+    "test:int": "vitest run --project int",
+    "typecheck": "tsc --noEmit",
+    "db:generate": "drizzle-kit generate",
+    "db:check": "drizzle-kit check",
+    "reset": "tsx src/cli/reset.ts",
+    "fixture:generate": "tsx scripts/generate-fixture.ts",
+    "bench": "tsx bench/run.ts"
+  },
+  "dependencies": {
+    "@agent-ops/shared": "workspace:*",
+    "@fastify/static": "10.1.7",
+    "drizzle-orm": "0.45.4",
+    "fastify": "5.12.7",
+    "pg": "8.23.1",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "@types/pg": "8.23.1",
+    "drizzle-kit": "0.31.11",
+    "tsx": "4.23.15",
+    "typescript": "6.0.3",
+    "vitest": "5.0.5"
+  }
+}

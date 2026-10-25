@@ -1,10 +1,10 @@
 ---
-status: proposed
+status: superseded
 date: 2026-10-24
-decision-makers: []  # drafted by Claude 2026-10-24, awaiting review
+decision-makers: []  # drafted by Claude 2026-10-24; superseded by ADR-0011 after owner chose the stack 2026-10-24
 scope: ["web/**"]
 supersedes: []
-superseded-by: []
+superseded-by: ["ADR-0011"]
 ---
 
 # ADR-0005: Build the web UI as a React 19 + Vite single-page app with Tailwind CSS

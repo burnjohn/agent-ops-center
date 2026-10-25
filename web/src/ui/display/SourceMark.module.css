@@ -1,0 +1,10 @@
+.mark {
+  display: inline-block;
+  min-width: 1em;
+  text-align: center;
+  color: var(--ink);
+}
+
+.muted {
+  color: var(--muted);
+}

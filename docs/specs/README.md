@@ -10,4 +10,7 @@ Rules:
 
 | Spec | Status | Plan |
 |------|--------|------|
-| [Abstract Project Spec](abstract-project-spec.md) — Agent Board + Mission Control | approved | TBD — after UI design |
+| [Abstract Project Spec](abstract-project-spec.md) — Agent Board + Mission Control | draft (revised 2026-10-24 to match the prototype; awaiting re-approval) | TBD — after UI design |
+| [Server API](server-api.md) — domain commands, REST endpoints, SSE stream, simulation engine, health & cost (SPEC-server-api) | approved (2026-10-24) | [`docs/plans/mvp.md`](../plans/mvp.md) |
+| [Database](database.md) — schema, `events` journal, seed fixture, reset (SPEC-database) | approved (2026-10-24) | [`docs/plans/mvp.md`](../plans/mvp.md) |
+| [Web UI](web-ui.md) — routes, screens, components, moves, live updates, a11y (SPEC-web-ui) | approved (2026-10-24) | [`docs/plans/mvp.md`](../plans/mvp.md) |

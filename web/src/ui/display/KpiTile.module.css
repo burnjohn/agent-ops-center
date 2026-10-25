@@ -1,0 +1,57 @@
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border-top: 1px solid var(--line-strong);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.link:hover {
+  background: var(--bg-sub);
+}
+
+.link:focus-visible {
+  outline: var(--focus);
+  outline-offset: var(--focus-offset);
+}
+
+.label {
+  font: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.value {
+  font: var(--text-metric);
+  letter-spacing: -0.045em;
+  font-variant-numeric: tabular-nums;
+}
+
+.attn {
+  color: var(--attn-ink);
+}
+
+.sub {
+  font: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.spark {
+  width: 100%;
+  max-width: 160px;
+  height: 24px;
+}
+
+.sparkBar {
+  fill: var(--line-strong);
+  opacity: 0.35;
+}
+
+.sparkNewest {
+  fill: var(--live);
+}

@@ -1,10 +1,10 @@
 ---
-status: proposed
+status: superseded
 date: 2026-10-24
-decision-makers: []  # drafted by Claude 2026-10-24, awaiting review
+decision-makers: []  # drafted by Claude 2026-10-24; superseded by ADR-0009 after owner chose the stack 2026-10-24
 scope: ["server/src/**", "shared/src/**"]
 supersedes: []
-superseded-by: []
+superseded-by: ["ADR-0009"]
 ---
 
 # ADR-0003: Store every change as an event in SQLite and derive state from it

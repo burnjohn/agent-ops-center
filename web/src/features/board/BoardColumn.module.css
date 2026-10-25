@@ -1,0 +1,91 @@
+.column {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border-left: 1px solid var(--line);
+}
+
+.column:first-child {
+  border-left: 0;
+}
+
+.doneColumn {
+  background: var(--bg-sub);
+}
+
+.accepting {
+  background: var(--bg-sub);
+  box-shadow: inset 0 0 0 1px var(--live);
+}
+
+.acceptingHover {
+  background: var(--bg-sub);
+  box-shadow: inset 0 0 0 3px var(--live);
+}
+
+.refusing {
+  opacity: 0.4;
+}
+
+.head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--line);
+}
+
+.headText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.num {
+  font: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.name {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.count {
+  font-size: 40px;
+  font-weight: 300;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+.hint {
+  margin: 0;
+  padding: var(--space-2) var(--space-4) 0;
+  font: var(--text-label);
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.hintOk {
+  color: var(--live);
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+}
+
+.empty {
+  margin: 0;
+  padding: var(--space-5) var(--space-2);
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+  border: 1px dashed var(--line);
+}

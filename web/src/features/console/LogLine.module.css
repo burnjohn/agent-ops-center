@@ -1,0 +1,98 @@
+.row {
+  display: grid;
+  grid-template-columns: 64px 76px minmax(0, 1fr);
+  gap: var(--space-3);
+  padding: 3px 0;
+}
+
+.stageRow {
+  margin-top: var(--space-2);
+}
+
+.failedRow {
+  background: color-mix(in srgb, var(--console-err) 12%, transparent);
+}
+
+.time {
+  color: var(--console-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.tag {
+  white-space: nowrap;
+}
+
+.operator {
+  color: var(--console-fg);
+  font-weight: 500;
+}
+
+.system {
+  color: var(--console-muted);
+}
+
+.stage {
+  color: var(--console-stage);
+}
+
+.agent {
+  color: var(--console-fg);
+}
+
+.ok {
+  color: var(--console-ok);
+}
+
+.err {
+  color: var(--console-err);
+}
+
+.body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.text {
+  color: var(--console-fg);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.operatorText {
+  font-weight: 500;
+}
+
+.systemText {
+  color: var(--console-muted);
+}
+
+.stageText {
+  color: var(--console-stage);
+}
+
+.errText {
+  color: var(--console-err);
+}
+
+.sub {
+  color: var(--console-muted);
+  font-size: 11.5px;
+}
+
+.output {
+  margin: var(--space-1) 0 2px;
+  padding: var(--space-2) 10px;
+  border-left: 2px solid var(--console-muted);
+  background: var(--console-out-bg);
+  color: var(--console-fg);
+  font: inherit;
+  font-size: 12px;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.outputErr {
+  border-left-color: var(--console-err);
+}

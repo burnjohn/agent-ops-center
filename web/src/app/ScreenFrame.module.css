@@ -1,0 +1,29 @@
+.frame {
+  padding: var(--space-5) var(--page-gutter);
+}
+
+.title {
+  margin: 0 0 var(--space-4);
+  font: var(--text-title);
+  letter-spacing: -0.03em;
+}
+
+.loading {
+  margin: 0;
+  font: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  color: var(--attn-ink);
+}
+
+.error p {
+  margin: 0;
+  font: var(--text-body);
+}

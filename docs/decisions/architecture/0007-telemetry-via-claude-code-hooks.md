@@ -1,13 +1,18 @@
 ---
 status: proposed
 date: 2026-10-24
-decision-makers: []  # drafted by Claude 2026-10-24, awaiting review
+decision-makers: []  # drafted by Claude 2026-10-24; deferred to next iteration by Ivan Lapa 2026-10-24
 scope: ["telemetry/**"]
 supersedes: []
 superseded-by: []
 ---
 
 # ADR-0007: Capture agent telemetry with Claude Code hooks that fail open
+
+> **Deferred to the next iteration.** The owner decided on 2026-10-24 that the MVP runs on simulated
+> agents only (ADR-0008); Claude Code telemetry is out of MVP scope (PDR-0008, proposed, records the scope cut). This record
+> stays `proposed` and is reviewed again when the next iteration starts. Until then no `telemetry/` package
+> is created (ADR-0002).
 
 ## Context and Problem Statement
 The product must record tool start/finish and turn end without the model (INT-07), never slow or block

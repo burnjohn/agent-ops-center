@@ -1,0 +1,52 @@
+.wrap {
+  position: relative;
+}
+
+.log {
+  max-height: 620px;
+  overflow-y: auto;
+  background: var(--console-bg);
+  color: var(--console-fg);
+  border: 1px solid var(--console-bg);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+.log:focus-visible {
+  outline: var(--focus);
+  outline-offset: var(--focus-offset);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  padding: 14px 18px 18px;
+}
+
+.tail {
+  display: grid;
+  grid-template-columns: 64px 76px minmax(0, 1fr);
+  gap: var(--space-3);
+  padding-top: 6px;
+  color: var(--console-muted);
+}
+
+.newLines {
+  position: absolute;
+  right: var(--space-4);
+  bottom: var(--space-3);
+  min-height: var(--control-h-sm);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--console-fg);
+  background: var(--console-bg);
+  color: var(--console-fg);
+  font: var(--text-label);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.newLines:focus-visible {
+  outline: var(--focus);
+  outline-offset: var(--focus-offset);
+}

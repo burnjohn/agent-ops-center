@@ -6,6 +6,7 @@
 | [`specs/`](specs/README.md) | Feature specs — what and why, EARS acceptance criteria | `spec-creator` | Become history after the feature ships |
 | [`decisions/architecture/`](decisions/architecture/README.md) | ADRs (MADR 4.0) — technical decisions with `scope` and `Confirmation` | humans, agents propose | Superseded, never edited |
 | [`decisions/product/`](decisions/product/README.md) | PDRs — product decisions with guardrails | humans, agents propose | Superseded, never edited |
+| [`design/`](design/README.md) | Visual design: tokens, component catalogue, mock data (the clickable prototype lives in the design canvas, not in the repo) | humans, design sessions | Updated when the design changes |
 | [`plans/`](plans/) | Implementation plans — phased tasks for implementers | `implementation-planner` | One per feature |
 | [`retros/`](retros/ledger.md) | Workflow retrospectives and the trend ledger | `workflow-retro` skill | Append-only |
 

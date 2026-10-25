@@ -1,0 +1,58 @@
+.page {
+  display: flex;
+  flex-direction: column;
+}
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-5) 40px;
+  padding: var(--space-6) var(--page-gutter) var(--space-5);
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.title {
+  margin: 0;
+  font: var(--text-display);
+  letter-spacing: -0.05em;
+}
+
+.kpis {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-left: auto;
+}
+
+.legend {
+  margin: 0;
+  padding: var(--space-3) var(--page-gutter);
+  border-bottom: 1px solid var(--line);
+  font: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.body {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.main {
+  flex: 999 1 640px;
+  min-width: 0;
+}
+
+/* UI-AC-137: below 1180 px the Event Log wraps under the agent grid. */
+@media (max-width: 1179px) {
+  .main {
+    flex-basis: 100%;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+}
