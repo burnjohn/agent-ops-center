@@ -1,0 +1,40 @@
+.row {
+  display: grid;
+  grid-template-columns: 64px 16px 72px 1fr auto;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--line);
+  font: var(--text-body);
+  list-style: none;
+}
+
+.warn {
+  color: var(--attn-ink);
+  font-weight: 500;
+}
+
+.time,
+.who,
+.ticket {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.time {
+  color: var(--muted);
+}
+
+.text {
+  overflow-wrap: anywhere;
+}
+
+.row a {
+  color: inherit;
+}
+
+.row a:focus-visible {
+  outline: var(--focus);
+  outline-offset: var(--focus-offset);
+}

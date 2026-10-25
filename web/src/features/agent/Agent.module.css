@@ -1,0 +1,115 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+}
+.id {
+  margin: 0;
+  font: var(--text-display);
+  letter-spacing: -0.05em;
+  font-size: 72px;
+}
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.badge {
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid var(--line-strong);
+  font: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.actions {
+  display: flex;
+  gap: var(--space-2);
+  margin-left: auto;
+}
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+}
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  border-top: 1px solid var(--line-strong);
+  padding-top: var(--space-4);
+}
+.sectionHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-3);
+}
+.h2 {
+  margin: 0;
+  font: var(--text-title);
+  letter-spacing: -0.03em;
+}
+.hint {
+  font: var(--text-body);
+  color: var(--muted);
+}
+.footnote {
+  margin: 0;
+  font: var(--text-label);
+  color: var(--muted);
+}
+.footnote a {
+  /* Mono label size: the base link padding is 2 px short of 40 px (AC-133). */
+  padding-block: var(--space-4);
+  margin-block: calc(-1 * var(--space-4));
+}
+.mismatchBadge {
+  padding: 0 var(--space-2);
+  background: var(--attn-bg);
+  border: 1px solid var(--attn-ink);
+  color: var(--attn-ink);
+  font: var(--text-label);
+  letter-spacing: 0.04em;
+}
+.svd tbody tr:has([data-mismatch]) {
+  background: var(--attn-bg);
+}
+.mismatchText {
+  color: var(--attn-ink);
+}
+.note {
+  margin: 0;
+  font: var(--text-body);
+  color: var(--attn-ink);
+}
+.tickets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.ticketRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--control-h);
+  padding: var(--space-2) 0;
+  margin-block: 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+}
+.ticketId {
+  font: var(--text-label);
+  color: var(--muted);
+}
+.ticketStatus {
+  margin-left: auto;
+  font: var(--text-label);
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}

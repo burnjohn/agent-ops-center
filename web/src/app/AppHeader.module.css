@@ -1,0 +1,88 @@
+.header {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-5);
+  min-height: 56px;
+  padding: 0 var(--page-gutter);
+  border-bottom: 1px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0 var(--space-4);
+  margin-left: calc(-1 * var(--page-gutter));
+  background: var(--ink);
+  color: var(--bg);
+  font: var(--text-card);
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}
+
+.mark {
+  display: grid;
+  grid-template: 1fr 1fr / 1fr 1fr;
+  gap: 2px;
+  width: 16px;
+  height: 16px;
+}
+
+.mark i {
+  background: var(--bg);
+}
+
+.mark .markAttn {
+  background: var(--attn);
+}
+
+.nav {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-4);
+}
+
+.navItem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  border-bottom: 3px solid transparent;
+  color: var(--ink);
+  font: var(--text-body);
+  text-decoration: none;
+}
+
+.navItem[aria-current='page'] {
+  font-weight: 600;
+  border-bottom-color: var(--ink);
+}
+
+.navItem:focus-visible,
+.brand:focus-visible {
+  outline: var(--focus);
+  outline-offset: calc(-1 * var(--focus-offset));
+}
+
+.badge {
+  padding: 0 var(--space-2);
+  background: var(--attn);
+  color: var(--on-attn);
+  font: var(--text-label);
+  letter-spacing: 0.04em;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-left: auto;
+}
+
+.local {
+  font: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}

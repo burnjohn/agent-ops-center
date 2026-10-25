@@ -1,0 +1,34 @@
+.wrap {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: var(--space-2);
+}
+
+.bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 11px;
+}
+
+.on,
+.off {
+  width: 3px;
+}
+
+.on {
+  background: var(--ink);
+}
+
+.off {
+  background: var(--line);
+}
+
+.word {
+  font: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  /* Cards on an accent fill (Blocked) set --priority-word to --on-attn. */
+  color: var(--priority-word, var(--muted));
+  line-height: 1;
+}

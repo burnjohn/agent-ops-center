@@ -1,0 +1,9 @@
+.banner {
+  width: 100%;
+  padding: var(--space-2) var(--page-gutter);
+  background: var(--ink);
+  color: var(--bg);
+  font: var(--text-label);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}

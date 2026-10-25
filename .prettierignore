@@ -1,0 +1,5 @@
+.claude/
+docs/
+server/fixture/
+server/drizzle/meta/
+pnpm-lock.yaml

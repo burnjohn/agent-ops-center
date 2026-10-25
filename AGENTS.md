@@ -7,8 +7,9 @@ while any `CLAUDE.md`, `.claude/CLAUDE.md` or `CLAUDE.local.md` exists, Claude C
 ## Project
 
 **Agent Ops Center** — the product is defined in `docs/decisions/product/` and `docs/specs/`.
-The stack is **not chosen yet**: until an accepted ADR fixes it, do not scaffold frameworks,
-add dependencies or create packages on your own. Propose an ADR first (see below).
+The stack is fixed by accepted ADR-0002, ADR-0004 and ADR-0008 through ADR-0012 (see
+`docs/decisions/architecture/README.md`). Do not add dependencies, frameworks or packages outside an
+accepted ADR; propose an ADR first (see below).
 
 ## Repository layout
 
@@ -19,7 +20,7 @@ AGENTS.md                    project-wide agent instructions (this file)
 .claude/skills/              on-demand skills (catalog: .claude/skills/README.md)
 docs/architecture/           how the system is built (overview, modules, diagrams)
 docs/specs/                  feature specs — WHAT and WHY, EARS acceptance criteria
-docs/design/                 tokens, component catalogue, mock data, clickable prototype source
+docs/design/                 tokens, component catalogue, mock data (prototype: canvas only, git-ignored)
 docs/decisions/architecture/ ADRs (MADR 4.0) — technical decisions that constrain the code
 docs/decisions/product/      PDRs — product decisions that constrain the specs
 docs/plans/                  implementation plans written by implementation-planner
@@ -30,13 +31,15 @@ insights/                    project-wide self-learning notes (INSIGHTS.md, gotc
 
 ## Modules
 
-No modules yet. When a module (package/app) is created, add a row here and give it:
+When a module (package/app) is created, add a row here and give it:
 `<module>/AGENTS.md`, `<module>/insights/INSIGHTS.md`
 and `<module>/insights/gotchas.md`. Agents read this table to know which modules exist.
 
-| Module | Path | Purpose | Test command | Typecheck command |
-|--------|------|---------|--------------|-------------------|
-| — | — | — | — | — |
+| Module | Path      | Purpose                                                                           | Test command                           | Typecheck command                           |
+| ------ | --------- | --------------------------------------------------------------------------------- | -------------------------------------- | ------------------------------------------- |
+| shared | `shared/` | Zod contracts and enums shared by server and web                                  | `pnpm --filter @agent-ops/shared test` | `pnpm --filter @agent-ops/shared typecheck` |
+| server | `server/` | Fastify API, Drizzle/Postgres, CLI (unit + int; int needs `docker compose up -d`) | `pnpm --filter @agent-ops/server test` | `pnpm --filter @agent-ops/server typecheck` |
+| web    | `web/`    | React SPA (e2e: `pnpm --filter @agent-ops/web e2e`)                               | `pnpm --filter @agent-ops/web test`    | `pnpm --filter @agent-ops/web typecheck`    |
 
 ## Workflow: Spec-Driven Development
 

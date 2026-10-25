@@ -1,0 +1,77 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  min-height: 64px;
+}
+
+.running {
+  border-color: var(--ink);
+}
+
+.blocked {
+  background: var(--attn);
+  border-color: var(--attn);
+  color: var(--on-attn);
+}
+
+.failed {
+  background: var(--attn-bg);
+  border-color: var(--attn-ink);
+  color: var(--attn-ink);
+}
+
+.dashed {
+  border: 1px dashed var(--line-strong);
+  color: var(--muted);
+}
+
+.plain {
+  border-color: var(--line);
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  font: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.title {
+  flex: 1;
+  font-weight: 500;
+}
+
+.meta {
+  font-variant-numeric: tabular-nums;
+}
+
+.mark.live {
+  color: var(--live);
+}
+
+.detail {
+  font: var(--text-body);
+  overflow-wrap: anywhere;
+}
+
+.pulse {
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse {
+    animation: none;
+  }
+}

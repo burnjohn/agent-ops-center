@@ -11,15 +11,16 @@ wins until it is updated — see [Prototype vs spec](#prototype-vs-spec).
 | [`tokens.json`](tokens.json) | The same tokens for a theme object in code |
 | [`components.md`](components.md) | Component catalogue: contents, states, tokens |
 | [`mock-data.md`](mock-data.md) | The mock dataset the prototype runs on (agents, tickets, sessions, prices) |
-| [`prototype/app.dc.html`](prototype/app.dc.html) | Source of the clickable prototype — all screens in one file; behaviour reference |
-| [`prototype/tokens.dc.html`](prototype/tokens.dc.html) | Source of the tokens artboard |
+The clickable prototype is **not stored in the repository**. It lives in the design canvas
+(private to the owner until shared): https://claude.ai/artifact/Sf9BuRyhZ3q9VhFwMRbeha — open it
+focused on the `LIVE PROTOTYPE` artboard. Specs, plans and code comments that cite
+`docs/design/prototype/*.dc.html` refer to that canvas source; a local copy may sit in
+`docs/design/prototype/`, which is git-ignored. The prototype is **not** production code — build real
+components from `tokens.css` and `components.md`.
 
-Live prototype (canvas, private to the owner until shared):
-https://claude.ai/artifact/Sf9BuRyhZ3q9VhFwMRbeha — open it focused on the `LIVE PROTOTYPE` artboard.
-
-`*.dc.html` files are in the canvas "Design Component" format: HTML markup with `{{hole}}` bindings and
-one `class Component extends DCLogic` block. They are **not** production code — read them for layout,
-copy, states and behaviour; build real components from `tokens.css` and `components.md`.
+`server/fixture/fixture.json` was generated from the prototype and is committed, so tests and the app
+do not need it. Regenerating it (`pnpm --filter @agent-ops/server fixture:generate`) needs a local copy
+of `app.dc.html` in `docs/design/prototype/`.
 
 ## Style in one paragraph
 

@@ -1,0 +1,27 @@
+.field {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.label {
+  font: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.select {
+  min-height: var(--control-h);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--ink);
+  font: var(--text-body);
+}
+
+.select:focus-visible {
+  outline: var(--focus);
+  outline-offset: var(--focus-offset);
+}

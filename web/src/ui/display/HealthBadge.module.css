@@ -1,0 +1,18 @@
+.badge {
+  font: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.online {
+  color: var(--ink);
+}
+
+.stale {
+  color: var(--attn-ink);
+}
+
+.offline {
+  color: var(--muted);
+}
